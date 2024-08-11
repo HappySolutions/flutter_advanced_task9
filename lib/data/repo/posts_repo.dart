@@ -1,26 +1,20 @@
-import 'package:flutter_advanced_task9/data/models/call_result_model.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter_advanced_task9/data/models/post.dart';
 import 'package:flutter_advanced_task9/services/dio_service.dart';
 
-class PostsRepo {
-  Future<CallResult> getPosts() async {
+abstract class PostsRepo {
+  static Future<List<Post>> fetchPostsData() async {
     try {
-      var response = await DioService.dio.get('posts');
-      if ((response.statusCode ?? 0) >= 200 &&
-          (response.statusCode ?? 0) < 299) {
-        return CallResult(
-            status: response.statusCode!,
-            statusMessage: response.statusMessage!,
-            data: response.data,
-            error: '');
+      final response = await DioService.dio.get("posts");
+
+      if (response.statusCode == 200) {
+        var posts = List<Post>.from(response.data.map((e) => Post.fromJson(e)));
+        return posts;
       } else {
-        return CallResult(
-            status: response.statusCode!,
-            statusMessage: '',
-            data: null,
-            error: 'Error : ${response.statusCode!}');
+        throw "Error Loading Posts";
       }
-    } catch (e) {
-      return CallResult(status: 500, statusMessage: '', data: null, error: '');
+    } on DioException catch (error) {
+      throw Exception(error);
     }
   }
 }
