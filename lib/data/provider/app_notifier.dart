@@ -2,11 +2,11 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_task9/data/models/post.dart';
-import 'package:flutter_advanced_task9/data/repo/posts_repo.dart';
+import 'package:flutter_advanced_task9/data/repo/app_repo.dart';
 
 enum PostsState { loading, success, error }
 
-class PostsNotifier extends ChangeNotifier {
+class AppNotifier extends ChangeNotifier {
   String? _message;
   String? get message => _message;
 
@@ -18,7 +18,7 @@ class PostsNotifier extends ChangeNotifier {
 
   Future<void> fetchPostsData() async {
     try {
-      final response = await PostsRepo.fetchPostsData();
+      final response = await AppRepo.fetchPostsData();
 
       if (response.isNotEmpty) {
         _postsList.addAll(response);

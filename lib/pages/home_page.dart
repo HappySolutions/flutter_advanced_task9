@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_advanced_task9/data/provider/posts_notifier.dart';
+import 'package:flutter_advanced_task9/data/provider/app_notifier.dart';
 import 'package:flutter_advanced_task9/widgets/posts_list_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Center(child: Text('Posts Page')),
       ),
-      body: Consumer<PostsNotifier>(
+      body: Consumer<AppNotifier>(
         builder: (context, value, child) {
           if (value.postsState == PostsState.loading) {
             return const Center(child: CircularProgressIndicator());
