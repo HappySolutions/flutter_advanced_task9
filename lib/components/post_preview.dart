@@ -11,7 +11,7 @@ class PostPreview extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return Container(
-      height: size.height * 0.40,
+      height: size.height * 0.45,
       width: size.width,
       padding: const EdgeInsets.all(20.0),
       decoration: const BoxDecoration(color: Colors.white),

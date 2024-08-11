@@ -3,18 +3,8 @@ import 'package:flutter_advanced_task9/data/provider/app_notifier.dart';
 import 'package:flutter_advanced_task9/widgets/posts_list_widget.dart';
 import 'package:provider/provider.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
