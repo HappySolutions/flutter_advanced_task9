@@ -19,16 +19,16 @@ abstract class AppRepo {
     }
   }
 
-  static Future<List<Comment>> fetchCommentsData() async {
+  static Future<List<Comment>> fetchCommentsData(int id) async {
     try {
-      final response = await DioService.dio.get("comments");
+      final response = await DioService.dio.get("posts/$id/comments");
 
       if (response.statusCode == 200) {
-        var posts =
-            List<Comment>.from(response.data.map((e) => Post.fromJson(e)));
-        return posts;
+        var comments =
+            List<Comment>.from(response.data.map((e) => Comment.fromJson(e)));
+        return comments;
       } else {
-        throw "Error Loading Posts";
+        throw "Error Loading Comments";
       }
     } on DioException catch (error) {
       throw Exception(error);

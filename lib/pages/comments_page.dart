@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_task9/data/models/post.dart';
+import 'package:flutter_advanced_task9/data/provider/app_notifier.dart';
+import 'package:flutter_advanced_task9/widgets/posts_list_widget.dart';
+import 'package:provider/provider.dart';
 
 class CommentsPage extends StatefulWidget {
   final Post post;
@@ -12,7 +15,7 @@ class CommentsPage extends StatefulWidget {
 class _CommentsPageState extends State<CommentsPage> {
   @override
   void initState() {
-    // context.read<CommentsBloc>().add(GetCommentsEvent(widget.post.id ?? 1));
+    context.read().add(AppNotifier()..fetchCommentsData(widget.post.id ?? 1));
     super.initState();
   }
 
@@ -22,7 +25,18 @@ class _CommentsPageState extends State<CommentsPage> {
       appBar: AppBar(
         title: const Text('Post Comments'),
       ),
-      body: const SizedBox(),
+      body: Consumer<AppNotifier>(
+        builder: (context, value, child) {
+          if (value.postsState == PostsState.loading) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (value.postsState == PostsState.error) {
+            return Center(
+              child: Text(value.message.toString()),
+            );
+          }
+          return PostsListWidget(posts: value.postsList);
+        },
+      ),
     );
   }
 }

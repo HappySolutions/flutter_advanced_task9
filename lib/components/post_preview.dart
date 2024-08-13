@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_task9/data/models/post.dart';
+import 'package:flutter_advanced_task9/pages/comments_page.dart';
 
 class PostPreview extends StatelessWidget {
   final Post post;
@@ -44,12 +45,12 @@ class PostPreview extends StatelessWidget {
           ElevatedButton(
             style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
             onPressed: () {
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (context) => CommentsPage(
-              //               post: post,
-              //             )));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => CommentsPage(
+                            post: post,
+                          )));
             },
             child: const Text('Show Comments',
                 style: TextStyle(
