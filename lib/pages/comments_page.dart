@@ -27,14 +27,64 @@ class _CommentsPageState extends State<CommentsPage> {
       ),
       body: Consumer<AppNotifier>(
         builder: (context, value, child) {
-          if (value.postsState == PostsState.loading) {
+          if (value.commentsState == CommentsState.loading) {
             return const Center(child: CircularProgressIndicator());
-          } else if (value.postsState == PostsState.error) {
+          } else if (value.commentsState == CommentsState.error) {
             return Center(
               child: Text(value.message.toString()),
             );
           }
-          return PostsListWidget(posts: value.postsList);
+          return ListView.separated(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              shrinkWrap: true,
+              physics: const ScrollPhysics(),
+              itemBuilder: (BuildContext context, int index) {
+                final comment = value.commentsList[index];
+                return InkWell(
+                  onTap: () {
+                    // showModalBottomSheet(
+                    //   isScrollControlled: true,
+                    //   context: context,
+                    //   builder: (context) {
+                    //     return Padding(
+                    //         padding: MediaQuery.of(context).viewInsets,
+                    //         child: PostPreview(post: post));
+                    //   },
+                    // );
+                  },
+                  child: Container(
+                    height: 150,
+                    // width: size.width,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10.0, vertical: 20.0),
+                    decoration: BoxDecoration(
+                      color: Colors.green.withOpacity(0.05),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          comment.name ?? 'No title',
+                          style: const TextStyle(
+                              fontSize: 15.0, fontWeight: FontWeight.w600),
+                        ),
+                        const SizedBox(height: 10.0),
+                        Text(
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 3,
+                          comment.body ?? 'No Text',
+                          style: const TextStyle(fontSize: 12.0),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+              separatorBuilder: (BuildContext context, int index) {
+                return const Divider();
+              },
+              itemCount: value.commentsList.length);
         },
       ),
     );
