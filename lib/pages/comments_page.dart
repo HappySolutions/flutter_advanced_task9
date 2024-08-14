@@ -40,44 +40,30 @@ class _CommentsPageState extends State<CommentsPage> {
               physics: const ScrollPhysics(),
               itemBuilder: (BuildContext context, int index) {
                 final comment = value.commentsList[index];
-                return InkWell(
-                  onTap: () {
-                    // showModalBottomSheet(
-                    //   isScrollControlled: true,
-                    //   context: context,
-                    //   builder: (context) {
-                    //     return Padding(
-                    //         padding: MediaQuery.of(context).viewInsets,
-                    //         child: PostPreview(post: post));
-                    //   },
-                    // );
-                  },
-                  child: Container(
-                    height: 150,
-                    // width: size.width,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10.0, vertical: 20.0),
-                    decoration: BoxDecoration(
-                      color: Colors.green.withOpacity(0.05),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          comment.name ?? 'No title',
-                          style: const TextStyle(
-                              fontSize: 15.0, fontWeight: FontWeight.w600),
-                        ),
-                        const SizedBox(height: 10.0),
-                        Text(
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 3,
-                          comment.body ?? 'No Text',
-                          style: const TextStyle(fontSize: 12.0),
-                        ),
-                      ],
-                    ),
+                return Container(
+                  height: 150,
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 10.0, vertical: 20.0),
+                  decoration: BoxDecoration(
+                    color: Colors.green.withOpacity(0.05),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        comment.name ?? 'No title',
+                        style: const TextStyle(
+                            fontSize: 15.0, fontWeight: FontWeight.w600),
+                      ),
+                      const SizedBox(height: 10.0),
+                      Text(
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 3,
+                        comment.body ?? 'No Text',
+                        style: const TextStyle(fontSize: 12.0),
+                      ),
+                    ],
                   ),
                 );
               },
