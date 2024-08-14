@@ -15,7 +15,7 @@ class CommentsPage extends StatefulWidget {
 class _CommentsPageState extends State<CommentsPage> {
   @override
   void initState() {
-    context.read().add(AppNotifier()..fetchCommentsData(widget.post.id ?? 1));
+    context.read<AppNotifier>().fetchCommentsData(widget.post.id ?? 1);
     super.initState();
   }
 
